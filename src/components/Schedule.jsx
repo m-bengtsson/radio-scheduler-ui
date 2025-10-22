@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { fetchBroadcasts, addBroadcast } from "../api/broadcast-api";
 
 function Schedule() {
   const [broadcasts, setBroadcasts] = useState([
@@ -10,50 +11,29 @@ function Schedule() {
       endTime: "",
       duration: "",
       type: "",
-      host: "",
-      coHost: "",
-      guest: "",
+      host: null,
+      coHost: null,
+      guest: null,
+      studioNumber: null,
     },
   ]);
-  const fetchBroadcasts = async () => {
-    try {
-      const response = await fetch("http://localhost:5208/api/schedule");
-      if (!response.ok) {
-        throw new Error(`Response status: ${response.status}`);
-      }
-      const result = await response.json();
-      setBroadcasts(result);
-    } catch (error) {
-      console.error(error.message);
-    }
-  };
+
   useEffect(() => {
-    fetchBroadcasts();
+    const getBroadcasts = async () => {
+      const data = await fetchBroadcasts();
+      if (data && data.length > 0) {
+        setBroadcasts(data);
+      }
+    };
+    getBroadcasts();
   }, []);
 
   const newBroadcast = {
     date: "2025-10-21",
-    title: "Make a post",
+    title: "Refactoring in JavaScript",
     startTime: "20:00",
     duration: "00:30:00",
     type: "Reportage",
-  };
-  // Add broadcast
-  const addBroadcast = async (newBroadcast) => {
-    try {
-      const response = await fetch("http://localhost:5208/api/schedule", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newBroadcast),
-      });
-      if (!response.ok) {
-        throw new Error(`Response status: ${response.status}`);
-      }
-    } catch (error) {
-      console.error(error.message);
-    }
   };
 
   const renderBroadcasts = broadcasts?.map((b) => (
