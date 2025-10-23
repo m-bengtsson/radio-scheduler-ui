@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react";
-import { fetchBroadcasts, addBroadcast } from "../api/broadcast-api";
+import {
+  getAllBroadcasts,
+  getBroadcastsToday,
+  getBroadcastById,
+  addBroadcast,
+  deleteBroadcast,
+} from "../api/broadcast-api";
 
 function Schedule() {
   const [broadcasts, setBroadcasts] = useState([
@@ -20,7 +26,7 @@ function Schedule() {
 
   useEffect(() => {
     const getBroadcasts = async () => {
-      const data = await fetchBroadcasts();
+      const data = await getAllBroadcasts();
       if (data && data.length > 0) {
         setBroadcasts(data);
       }
@@ -47,11 +53,28 @@ function Schedule() {
     </li>
   ));
 
+  const broadcastId = broadcasts[broadcasts.length - 1].id;
+  // console.log(broadcastId);
+
   return (
     <>
       <h1>Schedule</h1>
-      <ul>{renderBroadcasts}</ul>
+      <ul>
+        {broadcasts?.map((b) => (
+          <li key={b.id}>
+            <div>
+              <span>
+                {b.startTime}, {b.endTime}, Title: {b.title}, Host: {b.host},{" "}
+                {b.coHost && `Cohost: ${b.coHost}`}, Guest: {b.guest}
+              </span>
+            </div>
+          </li>
+        ))}
+      </ul>
       <button onClick={() => addBroadcast(newBroadcast)}>Add broadcast</button>
+      <button onClick={(e) => handleDeleteBroadcast(e)}>
+        Delete last broadcast
+      </button>
     </>
   );
 }
