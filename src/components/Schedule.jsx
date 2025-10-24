@@ -25,36 +25,36 @@ function Schedule() {
   ]);
 
   useEffect(() => {
-    const getBroadcasts = async () => {
+    const getBroadcastData = async () => {
       const data = await getAllBroadcasts();
+
       if (data && data.length > 0) {
         setBroadcasts(data);
       }
     };
-    getBroadcasts();
+    getBroadcastData();
   }, []);
 
   const newBroadcast = {
-    date: "2025-10-21",
+    date: "2025-10-25",
     title: "Refactoring in JavaScript",
     startTime: "20:00",
     duration: "00:30:00",
     type: "Reportage",
   };
 
-  const renderBroadcasts = broadcasts?.map((b) => (
-    <li key={b.id}>
-      <div>
-        <span>
-          {b.startTime}, {b.endTime}, Title: {b.title}, Host: {b.host},{" "}
-          {b.coHost && `Cohost: ${b.coHost}`}, Guest: {b.guest}
-        </span>
-      </div>
-    </li>
-  ));
-
-  const broadcastId = broadcasts[broadcasts.length - 1].id;
   // console.log(broadcastId);
+
+  const handleDeleteBroadcast = () => {
+    const broadcastId = broadcasts[broadcasts.length - 1].id;
+    getBroadcastById(broadcastId);
+
+    const success = deleteBroadcast(broadcastId);
+    if (success) {
+      setBroadcasts((prev) => prev.filter((b) => b.id !== broadcastId));
+    }
+  };
+  getBroadcastsToday();
 
   return (
     <>
@@ -72,7 +72,7 @@ function Schedule() {
         ))}
       </ul>
       <button onClick={() => addBroadcast(newBroadcast)}>Add broadcast</button>
-      <button onClick={(e) => handleDeleteBroadcast(e)}>
+      <button onClick={() => handleDeleteBroadcast()}>
         Delete last broadcast
       </button>
     </>
