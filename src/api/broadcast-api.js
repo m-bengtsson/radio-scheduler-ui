@@ -20,7 +20,6 @@ export const getAllBroadcasts = async () => {
 export const getBroadcastsToday = async () => {
   try {
     const response = await instance.get("/today");
-    console.log("Broadcasts today:", response.data);
     return response.data;
   } catch (error) {
     console.error("Failed to fetch today's broadcasts", error.message);
@@ -50,7 +49,22 @@ export const deleteBroadcast = async (id) => {
   try {
     const response = await instance.delete(`/${id}`);
     return response.status === 204;
-    // console.log("Deleted broadcast:", response.data);
+  } catch (error) {
+    console.error("Failed to delete broadcast", error.message);
+  }
+};
+export const addCohost = async (id, name) => {
+  try {
+    const response = await instance.patch(`/cohost/${id}`, { coHost: name });
+    return response.status === 200;
+  } catch (error) {
+    console.error("Failed to delete broadcast", error.message);
+  }
+};
+export const deleteCohost = async (id) => {
+  try {
+    const response = await instance.delete(`/cohost/${id}`);
+    return response.status === 204;
   } catch (error) {
     console.error("Failed to delete broadcast", error.message);
   }

@@ -5,6 +5,7 @@ import {
   getBroadcastById,
   addBroadcast,
   deleteBroadcast,
+  addCohost,
 } from "../api/broadcast-api";
 
 function Schedule() {
@@ -54,6 +55,16 @@ function Schedule() {
       setBroadcasts((prev) => prev.filter((b) => b.id !== broadcastId));
     }
   };
+
+  const handleAddCohost = (id, name) => {
+    id = broadcasts[broadcasts.length - 1].id;
+    name = "Anna Andersson";
+
+    const success = addCohost(id, name);
+    if (success) {
+      console.log("Cohost added", success);
+    }
+  };
   getBroadcastsToday();
 
   return (
@@ -75,6 +86,7 @@ function Schedule() {
       <button onClick={() => handleDeleteBroadcast()}>
         Delete last broadcast
       </button>
+      <button onClick={() => handleAddCohost()}>Add cohost</button>
     </>
   );
 }
