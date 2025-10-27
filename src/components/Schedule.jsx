@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import {
   getAllBroadcasts,
   getBroadcastsToday,
-  getBroadcastById,
   addBroadcast,
   deleteBroadcast,
   addCohost,
+  rescheduleBroadcast,
 } from "../api/broadcast-api";
 
 function Schedule() {
@@ -46,25 +46,41 @@ function Schedule() {
 
   // console.log(broadcastId);
 
+  const broadcastId = broadcasts[broadcasts.length - 1].id;
+  // Delete broadcast
   const handleDeleteBroadcast = () => {
-    const broadcastId = broadcasts[broadcasts.length - 1].id;
-    getBroadcastById(broadcastId);
-
     const success = deleteBroadcast(broadcastId);
     if (success) {
       setBroadcasts((prev) => prev.filter((b) => b.id !== broadcastId));
     }
   };
-
-  const handleAddCohost = (id, name) => {
+  // Add cohost
+  const handleAddCohost = async (id, name) => {
     id = broadcasts[broadcasts.length - 1].id;
     name = "Anna Andersson";
 
-    const success = addCohost(id, name);
+    const success = await addCohost(id, name);
     if (success) {
       console.log("Cohost added", success);
     }
   };
+  // Reschedule
+  const handleRescheduleBroadcast = async () => {
+    const rescheduleDate = { date: "2025-10-29", startTime: "13:00:00" };
+
+    const updatedBroadcast = await rescheduleBroadcast(
+      broadcastId,
+      rescheduleDate
+    );
+
+    if (updatedBroadcast) {
+      console.log("Broadcast rescheduled", updatedBroadcast);
+      setBroadcasts((prev) =>
+        prev.map((b) => (b.id === broadcastId ? updatedBroadcast : b))
+      );
+    }
+  };
+
   getBroadcastsToday();
 
   return (
@@ -75,8 +91,8 @@ function Schedule() {
           <li key={b.id}>
             <div>
               <span>
-                {b.startTime}, {b.endTime}, Title: {b.title}, Host: {b.host},{" "}
-                {b.coHost && `Cohost: ${b.coHost}`}, Guest: {b.guest}
+                {b.date}, {b.startTime}, {b.endTime}, Title: {b.title}, Host:{" "}
+                {b.host}, {b.coHost && `Cohost: ${b.coHost}`}, Guest: {b.guest}
               </span>
             </div>
           </li>
@@ -87,6 +103,9 @@ function Schedule() {
         Delete last broadcast
       </button>
       <button onClick={() => handleAddCohost()}>Add cohost</button>
+      <button onClick={() => handleRescheduleBroadcast()}>
+        Reschedule broadcast
+      </button>
     </>
   );
 }

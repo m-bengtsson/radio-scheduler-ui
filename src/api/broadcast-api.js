@@ -58,7 +58,7 @@ export const addCohost = async (id, name) => {
     const response = await instance.patch(`/cohost/${id}`, { coHost: name });
     return response.status === 200;
   } catch (error) {
-    console.error("Failed to delete broadcast", error.message);
+    console.error("Failed to add broadcast", error.message);
   }
 };
 export const deleteCohost = async (id) => {
@@ -66,11 +66,23 @@ export const deleteCohost = async (id) => {
     const response = await instance.delete(`/cohost/${id}`);
     return response.status === 204;
   } catch (error) {
-    console.error("Failed to delete broadcast", error.message);
+    console.error("Failed to remove cohost", error.message);
+  }
+};
+
+export const rescheduleBroadcast = async (id, newDate) => {
+  try {
+    const response = await instance.patch(`/${id}`, newDate);
+    return response.data;
+  } catch (error) {
+    console.error(
+      "Failed to reschedule broadcast",
+      error.message,
+      error.response,
+      error.request
+    );
   }
 };
 
 // TODO:
-// Reschedule broadcast
-// Remove and add cohost
 // Remove and add guest
