@@ -46,8 +46,6 @@ function Schedule() {
     type: "Reportage",
   };
 
-  // console.log(broadcastId);
-
   const broadcastId = broadcasts[broadcasts.length - 1].id;
   // Delete broadcast
   const handleDeleteBroadcast = () => {
@@ -89,6 +87,9 @@ function Schedule() {
     const updatedBroadcast = await addGuest(broadcastId, name);
     if (updatedBroadcast) {
       console.log("Guest added", updatedBroadcast);
+      setBroadcasts((prev) =>
+        prev.map((b) => (b.id === broadcastId ? { ...b, guest: name } : b))
+      );
     }
   };
 
@@ -98,7 +99,7 @@ function Schedule() {
     if (success) {
       console.log("guest removed:", success);
       setBroadcasts((prev) =>
-        prev.map((b) => (b.id === broadcastId ? (b.guest = "") : b))
+        prev.map((b) => (b.id === broadcastId ? { ...b, guest: null } : b))
       );
     }
   };
