@@ -6,6 +6,8 @@ import {
   deleteBroadcast,
   addCohost,
   rescheduleBroadcast,
+  deleteGuest,
+  addGuest,
 } from "../api/broadcast-api";
 
 function Schedule() {
@@ -81,6 +83,26 @@ function Schedule() {
     }
   };
 
+  const handleAddGuest = async (id, name) => {
+    name = "Beyonce";
+
+    const updatedBroadcast = await addGuest(broadcastId, name);
+    if (updatedBroadcast) {
+      console.log("Guest added", updatedBroadcast);
+    }
+  };
+
+  const handleDeleteGuest = async () => {
+    const success = await deleteGuest(broadcastId);
+
+    if (success) {
+      console.log("guest removed:", success);
+      setBroadcasts((prev) =>
+        prev.map((b) => (b.id === broadcastId ? (b.guest = "") : b))
+      );
+    }
+  };
+
   getBroadcastsToday();
 
   return (
@@ -91,8 +113,10 @@ function Schedule() {
           <li key={b.id}>
             <div>
               <span>
-                {b.date}, {b.startTime}, {b.endTime}, Title: {b.title}, Host:{" "}
-                {b.host}, {b.coHost && `Cohost: ${b.coHost}`}, Guest: {b.guest}
+                {b.date} {b.startTime} {b.endTime} Title: {b.title}{" "}
+                {b.host && `Host: ${b.host}`}{" "}
+                {b.coHost && `Cohost: ${b.coHost}`}{" "}
+                {b.guest && ` Guest: ${b.guest}`}
               </span>
             </div>
           </li>
@@ -105,6 +129,10 @@ function Schedule() {
       <button onClick={() => handleAddCohost()}>Add cohost</button>
       <button onClick={() => handleRescheduleBroadcast()}>
         Reschedule broadcast
+      </button>
+      <button onClick={() => handleAddGuest()}>Add guest</button>
+      <button onClick={() => handleDeleteGuest(broadcastId)}>
+        Remove guest
       </button>
     </>
   );
