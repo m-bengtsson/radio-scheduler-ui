@@ -11,6 +11,7 @@ import {
   deleteCohost,
 } from "../api/broadcast-api";
 import BroadcastList from "./BroadcastList";
+import AddBroadcastForm from "./AddBroadcastForm";
 
 function Schedule() {
   const [broadcasts, setBroadcasts] = useState([
@@ -28,6 +29,7 @@ function Schedule() {
       studioNumber: null,
     },
   ]);
+  const [formView, setFormView] = useState(false);
 
   useEffect(() => {
     const getBroadcastData = async () => {
@@ -40,18 +42,8 @@ function Schedule() {
     getBroadcastData();
   }, []);
 
-  const newBroadcast = {
-    date: "2025-10-25",
-    title: "Refactoring in JavaScript",
-    startTime: "20:00",
-    duration: "00:30:00",
-    type: "Reportage",
-  };
-
-  // const id = broadcasts[broadcasts.length - 1].id;
-
   // Add broadcast
-  const handleAddBroadcast = async () => {
+  const handleAddBroadcast = async (newBroadcast) => {
     const addedBroadcast = await addBroadcast(newBroadcast);
     if (addedBroadcast) {
       setBroadcasts((prev) => [...prev, addedBroadcast]);
@@ -135,9 +127,17 @@ function Schedule() {
 
   return (
     <>
-      <h1>Schedule</h1>
-      <BroadcastList broadcasts={broadcasts} actions={actions} />
-      <button onClick={() => handleAddBroadcast()}>Add broadcast</button>
+      {formView ? (
+        <AddBroadcastForm
+          onAddBroadcast={actions.onAddBroadcast}
+          setFormView={setFormView}
+        />
+      ) : (
+        <>
+          <BroadcastList broadcasts={broadcasts} actions={actions} />
+          <button onClick={() => setFormView(true)}>+ Add broadcast</button>
+        </>
+      )}
     </>
   );
 }
