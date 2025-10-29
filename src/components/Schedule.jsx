@@ -8,7 +8,9 @@ import {
   rescheduleBroadcast,
   deleteGuest,
   addGuest,
+  deleteCohost,
 } from "../api/broadcast-api";
+import BroadcastList from "./BroadcastList";
 
 function Schedule() {
   const [broadcasts, setBroadcasts] = useState([
@@ -46,95 +48,96 @@ function Schedule() {
     type: "Reportage",
   };
 
-  const broadcastId = broadcasts[broadcasts.length - 1].id;
-  // Delete broadcast
-  const handleDeleteBroadcast = () => {
-    const success = deleteBroadcast(broadcastId);
-    if (success) {
-      setBroadcasts((prev) => prev.filter((b) => b.id !== broadcastId));
-    }
-  };
-  // Add cohost
-  const handleAddCohost = async (id, name) => {
-    id = broadcasts[broadcasts.length - 1].id;
-    name = "Anna Andersson";
+  // const id = broadcasts[broadcasts.length - 1].id;
 
-    const success = await addCohost(id, name);
-    if (success) {
-      console.log("Cohost added", success);
+  // Add broadcast
+  const handleAddBroadcast = async () => {
+    const addedBroadcast = await addBroadcast(newBroadcast);
+    if (addedBroadcast) {
+      setBroadcasts((prev) => [...prev, addedBroadcast]);
     }
   };
+
+  // Delete broadcast
+  const handleDeleteBroadcast = (id) => {
+    const deleted = deleteBroadcast(id);
+    if (deleted) {
+      setBroadcasts((prev) => prev.filter((b) => b.id !== id));
+    }
+  };
+
   // Reschedule
-  const handleRescheduleBroadcast = async () => {
+  const handleRescheduleBroadcast = async (id) => {
     const rescheduleDate = { date: "2025-10-29", startTime: "13:00:00" };
 
-    const updatedBroadcast = await rescheduleBroadcast(
-      broadcastId,
-      rescheduleDate
-    );
+    const rescheduledBroadcast = await rescheduleBroadcast(id, rescheduleDate);
 
-    if (updatedBroadcast) {
-      console.log("Broadcast rescheduled", updatedBroadcast);
+    if (rescheduledBroadcast) {
       setBroadcasts((prev) =>
-        prev.map((b) => (b.id === broadcastId ? updatedBroadcast : b))
+        prev.map((b) => (b.id === id ? rescheduledBroadcast : b))
       );
     }
   };
 
-  const handleAddGuest = async (id, name) => {
-    name = "Beyonce";
+  // Add cohost
+  const handleAddCohost = async (id) => {
+    const name = "Anna Andersson";
 
-    const updatedBroadcast = await addGuest(broadcastId, name);
-    if (updatedBroadcast) {
-      console.log("Guest added", updatedBroadcast);
+    const addedCohost = await addCohost(id, name);
+    if (addedCohost) {
       setBroadcasts((prev) =>
-        prev.map((b) => (b.id === broadcastId ? { ...b, guest: name } : b))
+        prev.map((b) => (b.id === id ? { ...b, coHost: name } : b))
+      );
+    }
+  };
+  // Remove cohost
+  const handleDeleteCohost = async (id) => {
+    const deleted = await deleteCohost(id);
+
+    if (deleted) {
+      setBroadcasts((prev) =>
+        prev.map((b) => (b.id === id ? { ...b, coHost: null } : b))
       );
     }
   };
 
-  const handleDeleteGuest = async () => {
-    const success = await deleteGuest(broadcastId);
+  // Add guest
+  const handleAddGuest = async (id) => {
+    const name = "Beyonce";
 
-    if (success) {
-      console.log("guest removed:", success);
+    const addedGuest = await addGuest(id, name);
+    if (addedGuest) {
       setBroadcasts((prev) =>
-        prev.map((b) => (b.id === broadcastId ? { ...b, guest: null } : b))
+        prev.map((b) => (b.id === id ? { ...b, guest: name } : b))
       );
     }
   };
+  // Remove guest
+  const handleDeleteGuest = async (id) => {
+    const deleted = await deleteGuest(id);
 
+    if (deleted) {
+      setBroadcasts((prev) =>
+        prev.map((b) => (b.id === id ? { ...b, guest: null } : b))
+      );
+    }
+  };
+  const actions = {
+    onDelete: handleDeleteBroadcast,
+    onAddBroadcast: handleAddBroadcast,
+    onRescheduleBroadcast: handleRescheduleBroadcast,
+    onAddCohost: handleAddCohost,
+    onDeleteCohost: handleDeleteCohost,
+    onAddGuest: handleAddGuest,
+    onDeleteGuest: handleDeleteGuest,
+  };
   getBroadcastsToday();
 
   return (
     <>
       <h1>Schedule</h1>
-      <ul>
-        {broadcasts?.map((b) => (
-          <li key={b.id}>
-            <div>
-              <span>
-                {b.date} {b.startTime} {b.endTime} Title: {b.title}{" "}
-                {b.host && `Host: ${b.host}`}{" "}
-                {b.coHost && `Cohost: ${b.coHost}`}{" "}
-                {b.guest && ` Guest: ${b.guest}`}
-              </span>
-            </div>
-          </li>
-        ))}
-      </ul>
-      <button onClick={() => addBroadcast(newBroadcast)}>Add broadcast</button>
-      <button onClick={() => handleDeleteBroadcast()}>
-        Delete last broadcast
-      </button>
-      <button onClick={() => handleAddCohost()}>Add cohost</button>
-      <button onClick={() => handleRescheduleBroadcast()}>
-        Reschedule broadcast
-      </button>
-      <button onClick={() => handleAddGuest()}>Add guest</button>
-      <button onClick={() => handleDeleteGuest(broadcastId)}>
-        Remove guest
-      </button>
+      <BroadcastList broadcasts={broadcasts} actions={actions} />
+      <button onClick={() => handleAddBroadcast()}>Add broadcast</button>
     </>
   );
 }

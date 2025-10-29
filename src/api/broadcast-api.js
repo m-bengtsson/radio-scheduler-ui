@@ -40,6 +40,7 @@ export const addBroadcast = async (newBroadcast) => {
   try {
     const response = await instance.post("/", newBroadcast);
     console.log("Added broadcast:", response.data);
+    return response.data;
   } catch (error) {
     console.error("Failed to add broadcast", error.message);
   }
