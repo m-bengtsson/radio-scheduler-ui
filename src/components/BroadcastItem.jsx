@@ -10,9 +10,9 @@ const BroadcastItem = ({ broadcast, actions }) => {
           {guest && ` Guest: ${guest}`}
         </span>
       </div>
-      <button onClick={() => actions.onDelete(id)}>Delete broadcast</button>
+      <button onClick={() => actions.onDelete(id)}>Delete</button>
       <button onClick={() => actions.onRescheduleBroadcast(id)}>
-        Reschedule broadcast
+        Reschedule
       </button>
       {type === "LiveSession" && (
         <>
