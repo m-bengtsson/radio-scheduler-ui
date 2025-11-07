@@ -1,9 +1,12 @@
 import { NavLink } from "react-router";
+import PublicLayout from "../../layouts/PublicLayout";
 
 const Schedule = () => {
   return (
     <>
-      <h1>broadcast schedule</h1>
+      <PublicLayout>
+        <h1>broadcast schedule</h1>
+      </PublicLayout>
     </>
   );
 };

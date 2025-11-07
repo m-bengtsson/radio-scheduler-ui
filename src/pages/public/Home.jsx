@@ -1,8 +1,9 @@
 import BroadcastList from "../../components/public/BroadcastList";
 import { useEffect, useState } from "react";
 import { getAllBroadcasts } from "../../api/broadcast-api";
-import Menu from "../../components/public/Menu";
-import { publicMenuItems } from "../../siteConfigurations.js/navigation.js";
+// import Menu from "../../components/common/Menu.jsx";
+// import { publicMenuItems } from "../../siteConfigurations.js/navigation.js";
+import PublicLayout from "../../layouts/PublicLayout.jsx";
 
 const Home = () => {
   const [broadcasts, setBroadcasts] = useState([]);
@@ -20,9 +21,10 @@ const Home = () => {
 
   return (
     <>
-      <Menu entries={publicMenuItems} />
-      <h1>Home</h1>
-      <BroadcastList broadcasts={broadcasts} />
+      <PublicLayout>
+        <h1>Home</h1>
+        <BroadcastList broadcasts={broadcasts} />
+      </PublicLayout>
     </>
   );
 };
