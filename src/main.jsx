@@ -3,7 +3,9 @@ import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router";
 import "./index.css";
 import App from "./App.jsx";
-import Schedule from "./components/Schedule.jsx";
+import Edit from "./pages/admin/Edit.jsx";
+import Home from "./pages/public/Home.jsx";
+import NotFound from "./pages/NotFound.jsx";
 
 const router = createBrowserRouter([
   {
@@ -12,7 +14,15 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/admin",
-        Component: Schedule,
+        Component: Edit,
+      },
+      {
+        path: "/Home",
+        Component: Home,
+      },
+      {
+        path: "*",
+        Component: NotFound,
       },
     ],
   },
