@@ -9,7 +9,7 @@ import {
   deleteGuest,
   addGuest,
   deleteCohost,
-} from "../api/broadcast-api";
+} from "../../api/broadcast-api";
 import BroadcastList from "./BroadcastList";
 import AddBroadcastForm from "./AddBroadcastForm";
 
