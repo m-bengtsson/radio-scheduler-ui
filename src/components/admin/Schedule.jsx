@@ -14,21 +14,7 @@ import BroadcastList from "./BroadcastList";
 import AddBroadcastForm from "./AddBroadcastForm";
 
 function Schedule() {
-  const [broadcasts, setBroadcasts] = useState([
-    {
-      id: "",
-      date: "",
-      title: "",
-      startTime: "",
-      endTime: "",
-      duration: "",
-      type: "",
-      host: null,
-      coHost: null,
-      guest: null,
-      studioNumber: null,
-    },
-  ]);
+  const [broadcasts, setBroadcasts] = useState([]);
   const [formView, setFormView] = useState(false);
 
   useEffect(() => {

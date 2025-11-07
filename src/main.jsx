@@ -6,6 +6,7 @@ import App from "./App.jsx";
 import Edit from "./pages/admin/Edit.jsx";
 import Home from "./pages/public/Home.jsx";
 import NotFound from "./pages/NotFound.jsx";
+import Schedule from "./pages/public/Schedule.jsx";
 
 const router = createBrowserRouter([
   {
@@ -17,8 +18,12 @@ const router = createBrowserRouter([
         Component: Edit,
       },
       {
-        path: "/Home",
+        path: "/",
         Component: Home,
+      },
+      {
+        path: "/schedule",
+        Component: Schedule,
       },
       {
         path: "*",

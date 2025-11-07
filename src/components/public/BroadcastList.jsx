@@ -1,7 +1,13 @@
-const BroadcastList = () => {
+const BroadcastList = ({ broadcasts }) => {
   return (
     <>
-      <h1> BroadcastList</h1>
+      <ul>
+        {broadcasts?.map((b) => (
+          <li key={b.id}>
+            <span>{b.title}</span>
+          </li>
+        ))}
+      </ul>
     </>
   );
 };
