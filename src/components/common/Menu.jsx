@@ -1,14 +1,22 @@
-import { NavLink } from "react-router";
+import { NavLink, useLocation } from "react-router";
 
 const Menu = ({ entries }) => {
+  const location = useLocation();
   return (
     <>
       <nav className="public-nav">
-        {entries?.map((entry) => (
-          <NavLink key={entry.index} to={entry.path}>
-            {entry.label}
-          </NavLink>
-        ))}
+        {entries?.map((entry) => {
+          const isActive = location.pathname === entry.path;
+          return (
+            <NavLink
+              key={entry.index}
+              to={entry.path}
+              className={isActive ? "active-page" : ""}
+            >
+              {entry.label}
+            </NavLink>
+          );
+        })}
       </nav>
     </>
   );
