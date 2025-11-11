@@ -26,6 +26,11 @@ main {
 .active-page {
   text-decoration: underline;
 }
+
+.broadcast-item {
+  display: flex;
+  gap: 1rem;
+}
 @media (min-width: 600px) {
   nav ul {
     flex-direction: row;

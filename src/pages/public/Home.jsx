@@ -1,8 +1,7 @@
 import BroadcastList from "../../components/public/BroadcastList";
 import { useEffect, useState } from "react";
-import { getAllBroadcasts } from "../../api/broadcast-api";
-// import Menu from "../../components/common/Menu.jsx";
-// import { publicMenuItems } from "../../siteConfigurations.js/navigation.js";
+import { getBroadcastsToday } from "../../api/broadcast-api";
+
 import PublicLayout from "../../layouts/PublicLayout.jsx";
 
 const Home = () => {
@@ -10,7 +9,7 @@ const Home = () => {
 
   useEffect(() => {
     const getBroadcastData = async () => {
-      const data = await getAllBroadcasts();
+      const data = await getBroadcastsToday();
 
       if (data && data.length > 0) {
         setBroadcasts(data);
@@ -22,7 +21,7 @@ const Home = () => {
   return (
     <>
       <PublicLayout>
-        <h1>Home</h1>
+        <h2>Today</h2>
         <BroadcastList broadcasts={broadcasts} />
       </PublicLayout>
     </>
