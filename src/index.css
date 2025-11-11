@@ -11,7 +11,6 @@
   --color-bg: rgb(224, 221, 213);
   --color-text: rgb(39, 52, 75);
   line-height: 1.5;
-  font-weight: 400;
 }
 html,
 body {
@@ -35,11 +34,6 @@ a {
 /* a:hover {
   color: #535bf2;
 } */
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
 
 button {
   border-radius: 8px;

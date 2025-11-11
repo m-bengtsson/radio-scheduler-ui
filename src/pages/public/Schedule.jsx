@@ -5,7 +5,7 @@ const Schedule = () => {
   return (
     <>
       <PublicLayout>
-        <h1>broadcast schedule</h1>
+        <h2>Broadcast schedule</h2>
       </PublicLayout>
     </>
   );

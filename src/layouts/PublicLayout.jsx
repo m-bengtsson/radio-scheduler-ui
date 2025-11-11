@@ -5,7 +5,7 @@ const PublicLayout = (props) => {
   return (
     <>
       <header>
-        <h1>Public Header</h1>
+        <h1>Star radio</h1>
         <Menu entries={entries} />
       </header>
       <main>{props.children}</main>
