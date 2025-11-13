@@ -20,8 +20,7 @@ const Schedule = () => {
   }, []);
   return (
     <>
-      <PublicLayout>
-        <h2>Broadcast schedule</h2>
+      <PublicLayout title={"Broadcast Schedule"}>
         {loading && <p>Loading...</p>}
         {!loading && broadcasts.length === 0 && <p>No broadcasts found.</p>}
         {broadcasts.length > 0 && <BroadcastList broadcasts={broadcasts} />}

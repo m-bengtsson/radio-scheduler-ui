@@ -1,19 +1,31 @@
 import { formatTime, formatDate } from "../../utils/formatter";
 const BroadcastList = ({ broadcasts }) => {
-  console.log(broadcasts.map((b) => b));
+  const dayType = (index) =>
+    index === 0 ? "Today" : index === 1 ? "Tomorrow" : "";
+
   return (
     <>
-      <ul>
-        {broadcasts?.map((day) => (
-          <div key={day.date}>
-            {broadcasts?.length > 1 && <p>{formatDate(day.date)}</p>}
-            {day.broadcasts.map((b) => (
-              <li className="broadcast-item" key={b.id}>
-                <p>{formatTime(b.startTime)}</p>
-                <p>{b.title}</p>
-              </li>
-            ))}
-          </div>
+      <ul className="broadcast-list">
+        {broadcasts.map((day, index) => (
+          <li key={day.date} className="broadcast-day-list">
+            {broadcasts.length > 1 && (
+              <>
+                <p className="date row">
+                  {formatDate(day.date)} <i>{dayType(index)}</i>
+                </p>
+              </>
+            )}
+            <ul className="broadcast-grid">
+              {day.broadcasts.map((b) => (
+                <li className="row" key={b.id}>
+                  <div className="broadcast-item">
+                    <p>{formatTime(b.startTime)}</p>
+                    <p>{b.title}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </li>
         ))}
       </ul>
     </>
