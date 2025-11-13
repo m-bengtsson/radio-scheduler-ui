@@ -6,6 +6,7 @@ import PublicLayout from "../../layouts/PublicLayout.jsx";
 
 const Home = () => {
   const [broadcasts, setBroadcasts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const getBroadcastData = async () => {
@@ -14,6 +15,7 @@ const Home = () => {
       if (data && data.length > 0) {
         setBroadcasts(data);
       }
+      setLoading(false);
     };
     getBroadcastData();
   }, []);
@@ -21,8 +23,11 @@ const Home = () => {
   return (
     <>
       <PublicLayout>
+        <h3>Playing now</h3>
         <h2>Today</h2>
-        <BroadcastList broadcasts={broadcasts} />
+        {loading && <p>Loading...</p>}
+        {!loading && broadcasts.length === 0 && <p>No broadcasts found.</p>}
+        {broadcasts.length > 0 && <BroadcastList broadcasts={broadcasts} />}
       </PublicLayout>
     </>
   );
