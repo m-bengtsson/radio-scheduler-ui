@@ -1,22 +1,41 @@
-import { NavLink, useLocation } from "react-router";
+import { NavLink } from "react-router";
+import Star from "../../assets/svg/star";
 
-const Menu = ({ entries }) => {
-  const location = useLocation();
+const Navlinks = ({ entries }) => {
   return (
     <>
-      <nav className="public-nav">
-        {entries?.map((entry) => {
-          const isActive = location.pathname === entry.path;
-          return (
-            <NavLink
-              key={entry.index}
-              to={entry.path}
-              className={isActive ? "active-page" : ""}
-            >
-              {entry.label}
-            </NavLink>
-          );
-        })}
+      {entries?.map((entry) => {
+        return (
+          <NavLink
+            key={entry.index}
+            to={entry.path}
+            className={({ isActive }) => (isActive ? "active-page" : "")}
+          >
+            {({ isActive }) =>
+              isActive ? (
+                <>
+                  <Star />
+                  {entry.label}
+                  <Star />
+                </>
+              ) : (
+                entry.label
+              )
+            }
+          </NavLink>
+        );
+      })}
+    </>
+  );
+};
+const Menu = ({ entries, open }) => {
+  return (
+    <>
+      <nav className="menu">
+        <Navlinks entries={entries} />
+      </nav>
+      <nav className={`menu-mobile ${open ? "open" : ""}`}>
+        <Navlinks entries={entries} />
       </nav>
     </>
   );

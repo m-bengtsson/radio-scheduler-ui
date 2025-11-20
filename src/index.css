@@ -8,8 +8,8 @@
 
 :root {
   --font-family: system-ui, sans-serif;
-  --color-bg: rgb(224, 221, 213);
-  --color-text: rgb(39, 52, 75);
+  --color-bg: #e3e1f2;
+  --color-text: #1e226c;
   line-height: 1.5;
 }
 html,
