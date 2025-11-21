@@ -10,6 +10,7 @@ const PublicLayout = ({ children, title }) => {
     <>
       <header className="header">
         <Hamburger open={open} setOpen={setOpen} />
+
         <div className="logo">
           <Logo />
         </div>

@@ -3,50 +3,66 @@
   flex-direction: column;
   min-height: 100vh;
 }
+/* * {
+  border: 1px dashed blue;
+} */
 /* #root > * {
   padding: 0rem 0.5rem;
 } */
 
-header {
-  display: flex;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem 0;
-}
-
 main {
   flex: 1;
-  max-width: 100%;
   padding: 0 1rem;
+  margin: auto;
+  width: 100%;
 }
+.header {
+  text-align: center;
+  padding: 1rem 0;
+  height: 10rem;
+  border-bottom: 1.1px solid var(--color-text);
 
+  background-color: var(--color-primary);
+}
 /*-------- Navigation ---------*/
-
 .menu {
   display: none;
 }
-.menu-mobile {
+/* .menu-mobile {
+  position: absolute;
   visibility: hidden;
   transform: translateX(-100%);
   transition: transform 0.3s ease-in-out;
-}
-.menu-mobile.open {
-  visibility: visible;
-  pointer-events: auto;
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  flex-direction: column;
-  background: #effffa;
-  height: 100vh;
-  text-align: left;
-  padding: 2rem;
+} */
+
+.menu-mobile {
   position: absolute;
   top: 0;
   left: 0;
-  width: 70%;
+  width: 80%;
+  height: 100vh;
+  background: #ecfff3;
+  padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 1.5rem;
+  gap: 1.5rem;
+  transform: translateX(-100%);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transition: transform 0.35s ease-in-out, opacity 0.35s ease-in-out,
+    visibility 0s linear 0.35s; /* delay visibility change until after other transitions */
+}
+
+.menu-mobile.open {
   transform: translateX(0);
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition-delay: 0s, 0s, 0s;
 }
 
 @media (min-width: 600px) {
@@ -54,9 +70,14 @@ main {
   .menu-mobile {
     display: none !important;
   }
+
   .menu {
     display: flex;
     flex-direction: row;
+    width: 100%;
+    margin: auto;
+    align-items: center;
+    justify-content: center;
     gap: 2rem;
   }
   .logo {
@@ -65,13 +86,24 @@ main {
 }
 
 @media (min-width: 1024px) {
+  .menu {
+    width: auto;
+  }
+  .logo {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  .header {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: end;
+  }
+
   main {
     max-width: 1200px;
   }
-}
-
-.active-page {
-  text-decoration: underline;
 }
 
 .page-title {
@@ -84,7 +116,7 @@ main {
   display: grid;
   background-color: rgb(79, 79, 79);
   gap: 1px;
-  max-width: 1000px;
+  width: 100%;
 }
 .broadcast-day-list,
 .broadcast-grid {

@@ -7,19 +7,27 @@
 }
 
 :root {
-  --font-family: system-ui, sans-serif;
+  --font-jura: "Jura", sans-serif;
   --color-bg: #e3e1f2;
   --color-text: #1e226c;
+  --color-primary: #d7c1ff;
+  --font-bold: 1.5px var(--color-text);
+  --font-strong: 1.2px var(--color-text);
   line-height: 1.5;
+}
+.text-strong {
+  -webkit-text-stroke: var(--font-strong);
 }
 html,
 body {
   margin: 0;
   padding: 0;
   height: 100%;
-  font-family: var(--font-family);
+  font-family: var(--font-jura);
   background-color: var(--color-bg);
   color: var(--color-text);
+  -webkit-text-stroke: 0.4px black;
+  paint-order: stroke fill;
 }
 li {
   list-style: none;
@@ -29,11 +37,12 @@ a {
   font-weight: 500;
   color: inherit;
   text-decoration: inherit;
-  transition: 0.1s ease-in-out;
+  transition: 0.2s ease-in-out;
 }
-/* a:hover {
-  color: #535bf2;
-} */
+a:hover {
+  text-decoration: underline 1.5px;
+  text-underline-offset: 4px;
+}
 
 button {
   border-radius: 8px;

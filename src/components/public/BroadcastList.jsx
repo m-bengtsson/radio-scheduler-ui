@@ -10,8 +10,9 @@ const BroadcastList = ({ broadcasts }) => {
           <li key={day.date} className="broadcast-day-list">
             {broadcasts.length > 1 && (
               <>
-                <p className="date row">
-                  {formatDate(day.date)} <i>{dayType(index)}</i>
+                <p className="date row ">
+                  <span className="text-strong">{formatDate(day.date)} </span>
+                  <i>{dayType(index)}</i>
                 </p>
               </>
             )}

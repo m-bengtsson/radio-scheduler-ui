@@ -9,7 +9,7 @@ const Navlinks = ({ entries }) => {
           <NavLink
             key={entry.index}
             to={entry.path}
-            className={({ isActive }) => (isActive ? "active-page" : "")}
+            className={({ isActive }) => (isActive ? "text-strong" : "")}
           >
             {({ isActive }) =>
               isActive ? (
