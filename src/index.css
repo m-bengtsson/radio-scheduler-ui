@@ -8,7 +8,7 @@
 
 :root {
   --font-jura: "Jura", sans-serif;
-  --color-bg: #e3e1f2;
+  --color-bg: #eae6fa;
   --color-text: #1e226c;
   --color-primary: #d7c1ff;
   --font-bold: 1.5px var(--color-text);
@@ -26,7 +26,7 @@ body {
   font-family: var(--font-jura);
   background-color: var(--color-bg);
   color: var(--color-text);
-  -webkit-text-stroke: 0.4px black;
+  -webkit-text-stroke: 0.5px var(--color-text);
   paint-order: stroke fill;
 }
 li {

@@ -12,7 +12,7 @@ const PublicLayout = ({ children, title }) => {
         <Hamburger open={open} setOpen={setOpen} />
 
         <div className="logo">
-          <Logo />
+          <Logo height={60} />
         </div>
 
         <Menu entries={entries} open={open} />
