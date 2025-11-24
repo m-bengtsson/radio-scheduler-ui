@@ -29,6 +29,13 @@ body {
   -webkit-text-stroke: 0.5px var(--color-text);
   paint-order: stroke fill;
 }
+
+h1,
+h2,
+h3,
+h4 {
+  -webkit-text-stroke: var(--font-strong);
+}
 li {
   list-style: none;
 }

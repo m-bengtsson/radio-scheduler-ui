@@ -18,11 +18,11 @@ const PublicLayout = ({ children, title }) => {
         <Menu entries={entries} open={open} />
       </header>
       <main>
-        <h2 className="page-title">{title}</h2>
+        <h2 className="breadcrumb">{title}</h2>
         {children}
       </main>
       <footer>
-        <h3>Footer</h3>
+        <h4>Contact</h4>
       </footer>
     </>
   );

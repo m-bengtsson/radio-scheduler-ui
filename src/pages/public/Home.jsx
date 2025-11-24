@@ -1,7 +1,7 @@
 import BroadcastList from "../../components/public/BroadcastList";
 import { useEffect, useState } from "react";
 import { getBroadcastsToday } from "../../api/broadcast-api";
-
+import NowPlaying from "../../components/common/NowPlaying.jsx";
 import PublicLayout from "../../layouts/PublicLayout.jsx";
 
 const Home = () => {
@@ -22,11 +22,8 @@ const Home = () => {
 
   return (
     <>
-      <PublicLayout title={"Today"}>
-        <section>
-          <h3>Playing now</h3>
-          <p>Music - Top 100 autumn hits</p>
-        </section>
+      <PublicLayout title={">Home"}>
+        <NowPlaying />
         {loading && <p>Loading...</p>}
         <section>
           <h4>Todays schedule</h4>
