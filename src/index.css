@@ -15,9 +15,6 @@
   --font-strong: 1.2px var(--color-text);
   line-height: 1.5;
 }
-.text-strong {
-  -webkit-text-stroke: var(--font-strong);
-}
 html,
 body {
   margin: 0;
