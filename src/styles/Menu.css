@@ -23,7 +23,7 @@
   pointer-events: none;
 
   transition: transform 0.35s ease-in-out, opacity 0.35s ease-in-out,
-    visibility 0s linear 0.35s; /* delay visibility change until after other transitions */
+    visibility 0s linear 0.35s;
 }
 
 .menu-mobile.open {
@@ -35,9 +35,6 @@
 }
 
 @media (min-width: 600px) {
-  .header {
-    padding: 1rem;
-  }
   .hamburger,
   .menu-mobile {
     display: none !important;
@@ -57,20 +54,5 @@
 @media (min-width: 1024px) {
   .menu {
     width: auto;
-  }
-  .logo {
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-  .header {
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
-    align-items: end;
-  }
-
-  main {
-    max-width: 1200px;
   }
 }

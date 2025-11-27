@@ -17,7 +17,17 @@ main {
   align-items: center;
   padding: 1rem;
   border-bottom: 1.1px solid var(--color-text);
-  background-color: var(--color-primary);
+  background: linear-gradient(
+    45deg,
+    #aeaeb5 3%,
+    #fff 12%,
+    #cfd0d3 30%,
+    #dadade 50%,
+    #c8c7ce 65%,
+    #fff9ff 80%,
+    #9797a3 95%
+  );
+  /* background-color: var(--color-primary); */
 }
 
 footer {
@@ -28,11 +38,34 @@ footer {
   padding: 1rem;
 }
 
+@media (min-width: 600px) {
+  .header {
+    padding: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  main {
+    max-width: 1200px;
+  }
+  .header {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: end;
+    height: 6rem;
+  }
+  .logo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 6rem;
+  }
+}
 .breadcrumb {
   text-align: left;
   font-size: 1rem;
 }
-
 /*---------- Broadcastlist -----------*/
 
 .broadcast-list {
@@ -65,6 +98,19 @@ footer {
   flex-direction: column;
   align-items: center;
   gap: 16px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2px solid rgba(4, 5, 25, 0.179);
+  background: linear-gradient(
+    45deg,
+    #aeaeb5 3%,
+    #fff 12%,
+    #cfd0d3 30%,
+    #dadade 50%,
+    #c8c7ce 65%,
+    #fff9ff 80%,
+    #9797a3 95%
+  );
 }
 
 .card-image {
@@ -89,7 +135,7 @@ footer {
 
 @media (min-width: 600px) {
   .card {
-    height: 200px;
+    height: 150px;
     flex-direction: row;
     align-items: center;
     gap: 16px;

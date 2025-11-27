@@ -1,6 +1,6 @@
 const NowPlaying = () => {
   return (
-    <>
+    <section>
       <h3>Playing now</h3>
       <div className="card">
         <div className="card-image">
@@ -13,7 +13,7 @@ const NowPlaying = () => {
           <p>Music - Top 100 autumn hits</p>
         </div>
       </div>
-    </>
+    </section>
   );
 };
 

@@ -9,8 +9,8 @@
 :root {
   --font-jura: "Jura", sans-serif;
   --color-bg: #eae6fa;
-  --color-text: #1e226c;
-  --color-primary: #d7c1ff;
+  --color-text: #10123d;
+  --color-primary: #a672ff;
   --font-bold: 1.5px var(--color-text);
   --font-strong: 1.2px var(--color-text);
   line-height: 1.5;
