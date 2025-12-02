@@ -1,9 +1,10 @@
 import Header from "../components/common/Header.jsx";
+import { publicMenuItems as entries } from "../siteConfigurations.js/navigation.js";
 
 const PublicLayout = ({ children, title }) => {
   return (
     <>
-      <Header />
+      <Header entries={entries} />
       <main>
         {/* <h2 className="breadcrumb">{title}</h2> */}
         {children}

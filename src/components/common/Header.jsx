@@ -1,10 +1,9 @@
 import Menu from "./Menu";
-import { publicMenuItems as entries } from "../../siteConfigurations.js/navigation.js";
 import Logo from "../../assets/svg/Logo.jsx";
 import Hamburger from "../../components/common/Hamburger.jsx";
 import { useState } from "react";
 
-const Header = () => {
+const Header = ({ entries }) => {
   const [open, setOpen] = useState(false);
 
   return (
