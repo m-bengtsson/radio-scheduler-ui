@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import PublicLayout from "../../layouts/PublicLayout";
 import { getAllBroadcasts } from "../../api/broadcast-api";
 import BroadcastList from "../../components/public/BroadcastList";
+import ScheduleContainer from "../../components/public/ScheduleContainer";
 
 const Schedule = () => {
   const [broadcasts, setBroadcasts] = useState([]);
@@ -20,10 +21,10 @@ const Schedule = () => {
   }, []);
   return (
     <>
-      <PublicLayout title={"Broadcast Schedule"}>
+      <PublicLayout>
         {loading && <p>Loading...</p>}
         {!loading && broadcasts.length === 0 && <p>No broadcasts found.</p>}
-        {broadcasts.length > 0 && <BroadcastList broadcasts={broadcasts} />}
+        {broadcasts.length > 0 && <ScheduleContainer broadcasts={broadcasts} />}
       </PublicLayout>
     </>
   );

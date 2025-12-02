@@ -9,19 +9,25 @@
 :root {
   --font-jura: "Jura", sans-serif;
   --color-bg: #eae6fa;
+  --color-bg-secondary: #7b7d95;
   --color-text: #10123d;
   --color-primary: #a672ff;
   --font-bold: 1.5px var(--color-text);
   --font-strong: 1.2px var(--color-text);
   line-height: 1.5;
 }
+
+.text-bold {
+  -webkit-text-stroke: var(--font-bold);
+}
 html,
 body {
   margin: 0;
   padding: 0;
   height: 100%;
+
   font-family: var(--font-jura);
-  background-color: var(--color-bg);
+  background-color: var(--color-bg-secondary);
   color: var(--color-text);
   -webkit-text-stroke: 0.5px var(--color-text);
   paint-order: stroke fill;
@@ -55,7 +61,7 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #aac3e1;
   cursor: pointer;
   transition: border-color 0.25s;
 }

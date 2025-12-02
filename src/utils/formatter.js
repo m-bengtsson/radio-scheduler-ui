@@ -7,7 +7,7 @@ export const formatDate = (dateString) => {
 
   const date = new Date(dateString);
 
-  const options = { weekday: "long", day: "2-digit", month: "2-digit" };
+  const options = { weekday: "short", day: "2-digit", month: "2-digit" };
 
   const formatted = date.toLocaleDateString("en-GB", options);
 

@@ -1,7 +1,6 @@
 const NowPlaying = () => {
   return (
     <section>
-      <h3>Playing now</h3>
       <div className="card">
         <div className="card-image">
           <img
@@ -9,6 +8,7 @@ const NowPlaying = () => {
             alt="album cover"
           />
         </div>
+        <h3>Playing now</h3>
         <div className="card-text">
           <p>Music - Top 100 autumn hits</p>
         </div>
