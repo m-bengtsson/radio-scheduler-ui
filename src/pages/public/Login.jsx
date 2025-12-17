@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 const Login = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState("");
 
   const { register, handleSubmit } = useForm({
     defaultValues: {
@@ -15,14 +16,18 @@ const Login = () => {
     },
   });
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     setLoading(true);
-    try {
-      login(e.email, e.password);
-      navigate("/");
-    } catch (error) {
-      console.error("Login failed: ", error);
+    const isAuthenticated = await login(e.email, e.password);
+
+    console.log("log: ", isAuthenticated);
+
+    if (isAuthenticated) {
+      navigate("/admin/schedule");
+    } else {
+      setErrorMessage("Invalid email or password");
     }
+
     setLoading(false);
   };
 
@@ -30,7 +35,7 @@ const Login = () => {
     <>
       <PublicLayout title={">Login"}>
         {loading && <p>Loading...</p>}
-        <section>
+        <section className="login-section">
           <h4>Login</h4>
           <form onSubmit={handleSubmit(onSubmit)}>
             <label htmlFor="email">Email:</label>
@@ -49,6 +54,7 @@ const Login = () => {
             <br />
             <button type="submit">Login</button>
           </form>
+          <p>{errorMessage}</p>
         </section>
       </PublicLayout>
     </>

@@ -44,10 +44,7 @@
   .menu {
     display: flex;
     flex-direction: row;
-    width: 100%;
     margin: auto;
-    align-items: center;
-    justify-content: center;
     gap: 2rem;
   }
 }
