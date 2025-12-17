@@ -1,4 +1,5 @@
 import axios from "axios";
+import { redirect } from "react-router";
 
 const instance = axios.create({
   baseURL: "http://localhost:5208/",
@@ -16,5 +17,11 @@ export const login = async (email, password) => {
     return { accessToken, expiresIn };
   } catch (error) {
     console.error("Failed to login", error.message);
+    return false;
   }
+};
+
+export const logout = () => {
+  localStorage.removeItem("accessToken");
+  window.location.reload();
 };

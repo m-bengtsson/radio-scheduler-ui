@@ -3,9 +3,12 @@ import Logo from "../../assets/svg/Logo.jsx";
 import Hamburger from "../../components/common/Hamburger.jsx";
 import { useState } from "react";
 import { NavLink } from "react-router";
+import { logout } from "../../api/auth-api.js";
 
 const Header = ({ entries }) => {
   const [open, setOpen] = useState(false);
+
+  const isLoggedIn = !!localStorage.getItem("accessToken");
 
   return (
     <header className="header">
@@ -17,9 +20,15 @@ const Header = ({ entries }) => {
 
       <Menu entries={entries} open={open} />
 
-      <NavLink to="/login" className="login-link">
-        Login
-      </NavLink>
+      {isLoggedIn ? (
+        <button onClick={logout} className="login-link">
+          Logout
+        </button>
+      ) : (
+        <NavLink to="/login" className="login-link">
+          Login
+        </NavLink>
+      )}
     </header>
   );
 };

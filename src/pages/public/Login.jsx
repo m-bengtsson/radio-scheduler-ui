@@ -23,7 +23,7 @@ const Login = () => {
     console.log("log: ", isAuthenticated);
 
     if (isAuthenticated) {
-      navigate("/admin/schedule");
+      navigate("/");
     } else {
       setErrorMessage("Invalid email or password");
     }

@@ -1,7 +1,7 @@
 import Header from "../components/common/Header.jsx";
 import { publicMenuItems as entries } from "../siteConfigurations.js/navigation.js";
 
-const PublicLayout = ({ children, title }) => {
+const PublicLayout = ({ children }) => {
   return (
     <>
       <Header entries={entries} />
