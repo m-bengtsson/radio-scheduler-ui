@@ -8,7 +8,7 @@ import Home from "./pages/public/Home.jsx";
 import NotFound from "./pages/NotFound.jsx";
 import Schedule from "./pages/public/Schedule.jsx";
 import Profile from "./pages/contributor/Profile.jsx";
-import Login from "./pages/contributor/Login.jsx";
+import Login from "./pages/public/Login.jsx";
 
 const router = createBrowserRouter([
   {
@@ -32,7 +32,7 @@ const router = createBrowserRouter([
         Component: Profile,
       },
       {
-        path: "/contributer/login",
+        path: "/login",
         Component: Login,
       },
       {

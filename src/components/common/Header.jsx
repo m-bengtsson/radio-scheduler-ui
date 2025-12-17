@@ -1,7 +1,8 @@
-import Menu from "./Menu";
+import Menu, { Navlinks } from "./Menu";
 import Logo from "../../assets/svg/Logo.jsx";
 import Hamburger from "../../components/common/Hamburger.jsx";
 import { useState } from "react";
+import { NavLink } from "react-router";
 
 const Header = ({ entries }) => {
   const [open, setOpen] = useState(false);
@@ -15,6 +16,10 @@ const Header = ({ entries }) => {
       </div>
 
       <Menu entries={entries} open={open} />
+
+      <NavLink to="/login" className="login-link">
+        Login
+      </NavLink>
     </header>
   );
 };

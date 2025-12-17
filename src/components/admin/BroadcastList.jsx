@@ -1,9 +1,15 @@
 import BroadcastItem from "./BroadcastItem";
 
 const BroadcastList = ({ broadcasts, actions }) => {
+  const flattenedBroadcasts = broadcasts.flatMap((b) =>
+    b.broadcasts.map((inner) => ({
+      ...inner,
+      date: b.date,
+    }))
+  );
   return (
     <ul>
-      {broadcasts?.map((b) => (
+      {flattenedBroadcasts?.map((b) => (
         // Todo: order by date and time
 
         <BroadcastItem key={b.id} broadcast={b} actions={actions} />

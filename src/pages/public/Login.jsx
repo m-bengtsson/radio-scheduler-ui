@@ -1,0 +1,58 @@
+import { useNavigate } from "react-router";
+import { login } from "../../api/auth-api.js";
+import PublicLayout from "../../layouts/PublicLayout.jsx";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+
+const Login = () => {
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+  const { register, handleSubmit } = useForm({
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+
+  const onSubmit = (e) => {
+    setLoading(true);
+    try {
+      login(e.email, e.password);
+      navigate("/");
+    } catch (error) {
+      console.error("Login failed: ", error);
+    }
+    setLoading(false);
+  };
+
+  return (
+    <>
+      <PublicLayout title={">Login"}>
+        {loading && <p>Loading...</p>}
+        <section>
+          <h4>Login</h4>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <label htmlFor="email">Email:</label>
+            <input
+              type="text"
+              id="email"
+              {...register("email", { required: "Email is required" })}
+            />
+            <br />
+            <label htmlFor="password">Password:</label>
+            <input
+              type="password"
+              id="password"
+              {...register("password", { required: "Password is required" })}
+            />
+            <br />
+            <button type="submit">Login</button>
+          </form>
+        </section>
+      </PublicLayout>
+    </>
+  );
+};
+
+export default Login;

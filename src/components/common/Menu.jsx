@@ -1,7 +1,7 @@
 import { NavLink } from "react-router";
 import Star from "../../assets/svg/star";
 
-const Navlinks = ({ entries }) => {
+export const Navlinks = ({ entries }) => {
   return (
     <>
       {entries?.map((entry) => {

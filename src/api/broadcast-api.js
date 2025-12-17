@@ -7,6 +7,15 @@ const instance = axios.create({
   headers: { "Content-Type": "application/json" },
 });
 
+const instanceWithAuth = axios.create({
+  baseURL: "http://localhost:5208/api/admin/schedule",
+  timeout: 1000,
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+  },
+});
+
 export const getAllBroadcasts = async () => {
   try {
     const response = await instance.get("/");
@@ -29,7 +38,7 @@ export const getBroadcastsToday = async () => {
 
 export const getBroadcastById = async (id) => {
   try {
-    const response = await instance.get(`/${id}`);
+    const response = await instanceWithAuth.get(`/${id}`);
     return response.data;
   } catch (error) {
     console.error("Failed to fetch broadcast by id", error.message);
@@ -38,7 +47,7 @@ export const getBroadcastById = async (id) => {
 
 export const addBroadcast = async (newBroadcast) => {
   try {
-    const response = await instance.post("/", newBroadcast);
+    const response = await instanceWithAuth.post("/", newBroadcast);
     console.log("Added broadcast:", response.data);
     return response.data;
   } catch (error) {
@@ -48,7 +57,11 @@ export const addBroadcast = async (newBroadcast) => {
 
 export const deleteBroadcast = async (id) => {
   try {
-    const response = await instance.delete(`/${id}`);
+    const response = await instanceWithAuth.delete(`/${id}`);
+    if (response.status === 204) {
+      console.log("Deleted broadcast with id:", id);
+    }
+
     return response.status === 204;
   } catch (error) {
     console.error("Failed to delete broadcast", error.message);
@@ -57,7 +70,7 @@ export const deleteBroadcast = async (id) => {
 
 export const rescheduleBroadcast = async (id, newDate) => {
   try {
-    const response = await instance.patch(`/${id}`, newDate);
+    const response = await instanceWithAuth.patch(`/${id}`, newDate);
     return response.data;
   } catch (error) {
     console.error(
@@ -70,7 +83,9 @@ export const rescheduleBroadcast = async (id, newDate) => {
 };
 export const addCohost = async (id, name) => {
   try {
-    const response = await instance.patch(`/cohost/${id}`, { coHost: name });
+    const response = await instanceWithAuth.patch(`/cohost/${id}`, {
+      coHost: name,
+    });
     if (response.status === 200) {
       return response.data;
     }
@@ -80,7 +95,7 @@ export const addCohost = async (id, name) => {
 };
 export const deleteCohost = async (id) => {
   try {
-    const response = await instance.delete(`/cohost/${id}`);
+    const response = await instanceWithAuth.delete(`/cohost/${id}`);
     return response.status === 204 || response.status === 200;
   } catch (error) {
     console.error("Failed to remove cohost", error.message);
@@ -89,7 +104,9 @@ export const deleteCohost = async (id) => {
 
 export const addGuest = async (id, name) => {
   try {
-    const response = await instance.patch(`/guest/${id}`, { guest: name });
+    const response = await instanceWithAuth.patch(`/guest/${id}`, {
+      guest: name,
+    });
     if (response.status === 200) {
       return response.data;
     }
@@ -99,7 +116,7 @@ export const addGuest = async (id, name) => {
 };
 export const deleteGuest = async (id) => {
   try {
-    const response = await instance.delete(`/guest/${id}`);
+    const response = await instanceWithAuth.delete(`/guest/${id}`);
     return response.status === 204 || response.status === 200;
   } catch (error) {
     console.error("Failed to remove guest", error.message);
