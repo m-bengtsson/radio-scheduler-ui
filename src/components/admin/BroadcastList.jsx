@@ -2,7 +2,7 @@ import BroadcastItem from "./BroadcastItem";
 
 const BroadcastList = ({ broadcasts, actions }) => {
   const flattenedBroadcasts = broadcasts.flatMap((b) =>
-    b.broadcasts.map((inner) => ({
+    b.events.map((inner) => ({
       ...inner,
       date: b.date,
     }))
