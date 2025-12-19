@@ -1,7 +1,6 @@
 import Header from "../components/public/Header.jsx";
-import { publicMenuItems as entries } from "../siteConfigurations.js/navigation.js";
 
-const PublicLayout = ({ children }) => {
+const BaseLayout = ({ children, entries }) => {
   return (
     <>
       <Header entries={entries} />
@@ -16,4 +15,4 @@ const PublicLayout = ({ children }) => {
   );
 };
 
-export default PublicLayout;
+export default BaseLayout;

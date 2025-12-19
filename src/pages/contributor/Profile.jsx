@@ -1,16 +1,17 @@
 import { useState } from "react";
-import PublicLayout from "../../layouts/PublicLayout.jsx";
+import BaseLayout from "../../layouts/PublicLayout.jsx";
+import { contributorMenuItems } from "../../siteConfigurations.js/navigation.js";
 
 const Profile = () => {
   const [loading, setLoading] = useState(true);
   return (
     <>
-      <PublicLayout title={">Profile"}>
+      <BaseLayout title={">Profile"} entries={contributorMenuItems}>
         {loading && <p>Loading...</p>}
         <section>
           <h4>My profile</h4>
         </section>
-      </PublicLayout>
+      </BaseLayout>
     </>
   );
 };

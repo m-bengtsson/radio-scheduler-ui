@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { getBroadcastsToday } from "../../api/broadcast-api";
 import NowPlaying from "../../components/public/NowPlaying.jsx";
-import PublicLayout from "../../layouts/PublicLayout.jsx";
+import BaseLayout from "../../layouts/PublicLayout.jsx";
 import BroadcastRow from "../../components/public/BroadcastRow.jsx";
+import { publicMenuItems } from "../../siteConfigurations.js/navigation.js";
 
 const Home = () => {
   const [today, setToday] = useState([]);
@@ -24,7 +25,7 @@ const Home = () => {
 
   return (
     <>
-      <PublicLayout title={">Home"}>
+      <BaseLayout title={">Home"} entries={publicMenuItems}>
         <NowPlaying />
         {loading && <p>Loading...</p>}
         <section>
@@ -38,7 +39,7 @@ const Home = () => {
             </ul>
           )}
         </section>
-      </PublicLayout>
+      </BaseLayout>
     </>
   );
 };

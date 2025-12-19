@@ -28,7 +28,7 @@ const router = createBrowserRouter([
         Component: Schedule,
       },
       {
-        path: "/contributer/profile",
+        path: "/me",
         Component: Profile,
       },
       {

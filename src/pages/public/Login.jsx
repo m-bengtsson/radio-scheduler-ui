@@ -21,7 +21,7 @@ const Login = () => {
     const isAuthenticated = await login(e.email, e.password);
 
     if (isAuthenticated) {
-      navigate("/");
+      navigate("/me");
     } else {
       setErrorMessage("Invalid email or password");
     }
