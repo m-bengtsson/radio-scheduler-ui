@@ -1,6 +1,6 @@
-import Menu, { Navlinks } from "./Menu";
+import Menu, { Navlinks } from "./Menu.jsx";
 import Logo from "../../assets/svg/Logo.jsx";
-import Hamburger from "../../components/common/Hamburger.jsx";
+import Hamburger from "./Hamburger.jsx";
 import { useState } from "react";
 import { NavLink } from "react-router";
 import { logout } from "../../api/auth-api.js";

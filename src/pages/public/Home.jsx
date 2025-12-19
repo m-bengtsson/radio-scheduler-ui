@@ -1,11 +1,8 @@
-import BroadcastList from "../../components/public/BroadcastList";
 import { useEffect, useState } from "react";
 import { getBroadcastsToday } from "../../api/broadcast-api";
-import NowPlaying from "../../components/common/NowPlaying.jsx";
+import NowPlaying from "../../components/public/NowPlaying.jsx";
 import PublicLayout from "../../layouts/PublicLayout.jsx";
-import ScheduleContainer, {
-  BroadcastCard,
-} from "../../components/public/ScheduleContainer.jsx";
+import BroadcastRow from "../../components/public/BroadcastRow.jsx";
 
 const Home = () => {
   const [today, setToday] = useState([]);
@@ -16,9 +13,8 @@ const Home = () => {
       const data = await getBroadcastsToday();
 
       if (data && data.length > 0) {
-        const mapped = data.map((d) => d.broadcasts);
+        const mapped = data.map((d) => d.events);
 
-        console.log("mapped", mapped);
         setToday(mapped.flat());
       }
       setLoading(false);
@@ -35,9 +31,9 @@ const Home = () => {
           <h4>Todays schedule</h4>
           {!loading && today.length === 0 && <p>No broadcasts found.</p>}
           {today.length > 0 && (
-            <ul>
-              {today.map((b) => (
-                <BroadcastCard b={b} />
+            <ul className="broadcast-grid">
+              {today.map((b, index) => (
+                <BroadcastRow b={b} key={index} />
               ))}
             </ul>
           )}

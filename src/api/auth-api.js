@@ -1,5 +1,4 @@
 import axios from "axios";
-import { redirect } from "react-router";
 
 const instance = axios.create({
   baseURL: "http://localhost:5208/",

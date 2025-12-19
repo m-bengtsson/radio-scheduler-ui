@@ -48,7 +48,6 @@ export const getBroadcastById = async (id) => {
 export const addBroadcast = async (newBroadcast) => {
   try {
     const response = await instanceWithAuth.post("/", newBroadcast);
-    console.log("Added broadcast:", response.data);
     return response.data;
   } catch (error) {
     console.error("Failed to add broadcast", error.message);
@@ -59,7 +58,7 @@ export const deleteBroadcast = async (id) => {
   try {
     const response = await instanceWithAuth.delete(`/${id}`);
     if (response.status === 204) {
-      console.log("Deleted broadcast with id:", id);
+      return true;
     }
 
     return response.status === 204;

@@ -1,14 +1,14 @@
 import { useState } from "react";
-import { formatTime, formatDate } from "../../utils/formatter";
-const ScheduleContainer = ({ broadcasts }) => {
-  // const dayType = (index) =>
-  //   index === 0 ? "Today" : index === 1 ? "Tomorrow" : "";
+import { formatDate } from "../../utils/formatter.js";
+import BroadcastRow from "./BroadcastRow.jsx";
 
+// TODO
+// initially render todays broadcasts
+
+const BroadcastTable = ({ broadcasts }) => {
   const dates = broadcasts.filter((b) => b.date);
-
-  // initially render todays broadcasts
-
   const [selectedDay, setSelectedDay] = useState(null);
+
   const onDateClick = (day) => {
     setSelectedDay(day);
   };
@@ -17,9 +17,9 @@ const ScheduleContainer = ({ broadcasts }) => {
     <>
       <div className="schedule-container">
         <ul className="weekdays">
-          {dates.map((d, index) => (
+          {dates.map((d) => (
             <li
-              key={index}
+              key={d.date}
               className="weekday-button pushable"
               onClick={() => onDateClick(d)}
             >
@@ -41,15 +41,16 @@ const ScheduleContainer = ({ broadcasts }) => {
             <div className="broadcast-item">
               <p>Start</p>
               <p>Title</p>
-
               <p>Host</p>
               <p>Guest</p>
               <p>Type</p>
             </div>
           </li>
-          {selectedDay.broadcasts.map((b) => (
-            <BroadcastCard b={b} />
-          ))}
+          <ul className="broadcast-grid">
+            {selectedDay.events.map((b, index) => (
+              <BroadcastRow b={b} key={index} />
+            ))}
+          </ul>
         </ul>
       ) : (
         <p>no broadcasts</p>
@@ -58,20 +59,4 @@ const ScheduleContainer = ({ broadcasts }) => {
   );
 };
 
-export const BroadcastCard = ({ b }) => {
-  console.log("Card: ", b);
-  return (
-    <li className="row" key={b.id}>
-      <div className="broadcast-item">
-        <p>{formatTime(b.startTime)}</p>
-        <p>{b.title}</p>
-        {b.host ? <p>{b.host}</p> : <p>None</p>}
-        {b.guest ? <p>{b.guest}</p> : <p>None</p>}
-
-        <p>{b.type}</p>
-      </div>
-    </li>
-  );
-};
-
-export default ScheduleContainer;
+export default BroadcastTable;

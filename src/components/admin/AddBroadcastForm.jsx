@@ -15,7 +15,6 @@ const AddBroadcastForm = ({ onAddBroadcast, setFormView }) => {
   });
 
   const onSubmit = (data) => {
-    console.log("Data: ", data);
     try {
       onAddBroadcast(data);
     } catch {

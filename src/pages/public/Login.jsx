@@ -20,8 +20,6 @@ const Login = () => {
     setLoading(true);
     const isAuthenticated = await login(e.email, e.password);
 
-    console.log("log: ", isAuthenticated);
-
     if (isAuthenticated) {
       navigate("/");
     } else {

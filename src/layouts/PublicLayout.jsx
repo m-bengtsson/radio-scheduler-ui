@@ -1,4 +1,4 @@
-import Header from "../components/common/Header.jsx";
+import Header from "../components/public/Header.jsx";
 import { publicMenuItems as entries } from "../siteConfigurations.js/navigation.js";
 
 const PublicLayout = ({ children }) => {
